@@ -56,11 +56,18 @@ const carro = (function carro(){
         tanque += valorAbastecido;
     };
 
-    function mostratanque(){
+    function mostraTanque(){
         console.log(tanque);
     };
 
+    function mostraVelocidade(){
+        console.log("A velocidade é: " + velocidade);
+    }
+
     function acelerarCarro(valorAceleracao){
+        if(!verificaSeEstaLigado()){
+            return console.log("Não é possível acelerar, pois o carro está desligado");
+        }
         if(verificaTanqueVazio()){
             return "O carro precisa ser abastecido para acelerar";
         }
@@ -75,22 +82,28 @@ const carro = (function carro(){
 
         console.log("Acelerando...");
         console.log("Vrum vrum vrum");
-        console.log("A velocidade é: " + velocidade);
         
     };
 
     function frearCarro(valorFreio){
+        if(!verificaSeEstaLigado()){
+            return console.log("Não é possível desacelerar, pois o carro está desligado");
+        }
         console.log("Desacelerando...");
-        return velocidade -= valorFreio;
+        velocidade -= valorFreio;
     };
 
      return {
         abastecer: ((valorAbastecido) => {
             return abastecerCarro(valorAbastecido);
         }),
+
+        velocidade: (() => {
+            return mostraVelocidade();
+        }),
         
         tanque: (() => {
-            return mostratanque();
+            return mostraTanque();
         }),
 
         acelerar: ((valorAceleracao) => {
@@ -99,6 +112,14 @@ const carro = (function carro(){
 
         frear: ((valorFreio) => {
             return frearCarro(valorFreio);
+        }),
+
+        ligar: (() => {
+            return ligarCarro();
+        }),
+
+        desligar: (() => {
+            return desligarCarro();
         })
     };
 
@@ -106,12 +127,11 @@ const carro = (function carro(){
 
 //carro.tanque();
 carro.abastecer(50);
-carro.acelerar(50);
-//console.log(carro.acelerar(50));
-//carro.tanque();
+carro.ligar();
 carro.acelerar(50);
 carro.acelerar(50);
 carro.acelerar(40);
+
 
 
 //carro
