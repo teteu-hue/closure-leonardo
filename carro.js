@@ -27,24 +27,58 @@ const carro = (function carro(){
     };
 
     function verificaVelMax(valorAceleracao){
-        if((valorAceleracao + velocidade) > 140){
+        if((valorAceleracao + velocidade) > 150){
             console.log("O carro não suporta uma velocidade maior que 140KM");
             return true;
         }
         return false;
     };
 
-    function verificaVelocidade(valorAceleracao){
+    function verificaVelocidadeTrocaMarcha(){
     
-        if(verificaVelMax(valorAceleracao)){
-             return true;
-        } else {
-            if(velocidade >= 140){
-                return true;
-            } else {
-                return false;
-            };
+        if(velocidade > 140){
+            marcha = 6;
+            console.log("A marcha engatada é: "+ marcha);
+
+        } else if(velocidade <= 140 && velocidade > 100){
+            marcha = 5;
+            console.log("A marcha engatada é: "+ marcha);
+
+        } else if(velocidade <= 100 && velocidade > 60){
+            marcha = 4;
+            console.log("A marcha engatada é: "+ marcha);
+
+        } else if(velocidade <= 60 && velocidade > 50){
+            marcha = 3;
+            console.log("A marcha engatada é: "+ marcha);
+
+        } else if(velocidade <= 50 && velocidade > 40){
+            marcha = 2;
+            console.log("A marcha engatada é: "+ marcha);
+        };
+    };
+
+    function acelerarCarro(valorAceleracao){
+        if(!verificaSeEstaLigado()){
+            return console.log("Não é possível acelerar, pois o carro está desligado");
         }
+        if(verificaTanqueVazio()){
+            return "O carro precisa ser abastecido para acelerar";
+        }
+        if(valorAceleracao > 140){
+            return console.log("O carro não permite esse nível de aceleração");
+        }
+        if(verificaVelMax(valorAceleracao)){
+            return false;
+        }
+
+        velocidade += valorAceleracao;
+        verificaVelocidadeTrocaMarcha();
+
+        console.log("Acelerando...");
+        console.log("Vrum vrum vrum");
+        console.log("**************");
+        
     };
 
     function abastecerCarro(valorAbastecido){
@@ -62,27 +96,10 @@ const carro = (function carro(){
 
     function mostraVelocidade(){
         console.log("A velocidade é: " + velocidade);
-    }
+    };
 
-    function acelerarCarro(valorAceleracao){
-        if(!verificaSeEstaLigado()){
-            return console.log("Não é possível acelerar, pois o carro está desligado");
-        }
-        if(verificaTanqueVazio()){
-            return "O carro precisa ser abastecido para acelerar";
-        }
-        if(valorAceleracao > 140){
-            return "O carro não permite esse nível de aceleração";
-        }
-        if(verificaVelocidade(valorAceleracao)){
-            return "Valor de velocidade já está no máximo atingido";
-        } 
-
-        velocidade += valorAceleracao;
-
-        console.log("Acelerando...");
-        console.log("Vrum vrum vrum");
-        
+    function mostraMarcha(){
+        console.log(marcha);
     };
 
     function frearCarro(valorFreio){
@@ -120,6 +137,10 @@ const carro = (function carro(){
 
         desligar: (() => {
             return desligarCarro();
+        }),
+
+        marcha: (() => {
+            return mostraMarcha();
         })
     };
 
@@ -128,10 +149,24 @@ const carro = (function carro(){
 //carro.tanque();
 carro.abastecer(50);
 carro.ligar();
-carro.acelerar(50);
-carro.acelerar(50);
+carro.marcha();
+carro.acelerar(10);
+carro.marcha();
+carro.velocidade();
 carro.acelerar(40);
-
-
+carro.marcha();
+carro.velocidade();
+carro.acelerar(10);
+carro.marcha();
+carro.velocidade();
+carro.acelerar(10);
+carro.marcha();
+carro.velocidade();
+carro.acelerar(40);
+carro.marcha();
+carro.velocidade();
+carro.acelerar(40);
+carro.marcha();
+carro.velocidade();
 
 //carro
