@@ -36,6 +36,13 @@ const carro = (function carro(){
         }
         return false;
     };
+    function verificaVelMin(){
+        if(velocidade < 0){
+            console.log("O carro não suporte uma velocidade negativa");
+            return true;
+        }
+        return false;
+    };
 
     function verificaVelocidadeTrocaMarcha(){
     
@@ -91,7 +98,13 @@ const carro = (function carro(){
             return console.log("Não é possível desacelerar, pois o carro está desligado");
         }
         console.log("Desacelerando...");
+        
         velocidade -= valorFreio;
+        verificaVelocidadeTrocaMarcha();
+        if(verificaVelMin()){
+            return velocidade = 0;    
+        }
+        
     };
 
     function abastecerCarro(valorAbastecido){
@@ -156,14 +169,6 @@ const carro = (function carro(){
 carro.abastecer(50);
 carro.ligar();
 carro.marcha();
-carro.acelerar(10);
-carro.marcha();
-carro.velocidade();
-carro.acelerar(40);
-carro.marcha();
-carro.velocidade();
-carro.acelerar(10);
-carro.marcha();
 carro.velocidade();
 carro.acelerar(10);
 carro.marcha();
@@ -171,8 +176,23 @@ carro.velocidade();
 carro.acelerar(40);
 carro.marcha();
 carro.velocidade();
+carro.acelerar(10);
+carro.marcha();
+carro.velocidade();
+carro.acelerar(10);
+carro.marcha();
+carro.velocidade();
 carro.acelerar(40);
 carro.marcha();
 carro.velocidade();
+carro.acelerar(40);
+carro.marcha();
+console.log("****************");
+carro.velocidade();
+carro.frear(50);
+carro.marcha();
+carro.velocidade();
+carro.frear(50);
+carro.marcha();
 
 //carro
