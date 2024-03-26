@@ -4,6 +4,7 @@ const carro = (function carro(){
     let marcha = 1;
     let energia = false;
 
+    // liga e desliga
     function ligarCarro(){
         return energia = true;
     };
@@ -11,7 +12,9 @@ const carro = (function carro(){
     function desligarCarro(){
         return energia = false;
     };
+    // ********************
 
+    // verificações para acelerar
     function verificaSeEstaLigado(){
         if(energia == true){
             return true;
@@ -57,7 +60,9 @@ const carro = (function carro(){
             console.log("A marcha engatada é: "+ marcha);
         };
     };
+    // ********************
 
+    // funcoes do carro
     function acelerarCarro(valorAceleracao){
         if(!verificaSeEstaLigado()){
             return console.log("Não é possível acelerar, pois o carro está desligado");
@@ -81,6 +86,14 @@ const carro = (function carro(){
         
     };
 
+    function frearCarro(valorFreio){
+        if(!verificaSeEstaLigado()){
+            return console.log("Não é possível desacelerar, pois o carro está desligado");
+        }
+        console.log("Desacelerando...");
+        velocidade -= valorFreio;
+    };
+
     function abastecerCarro(valorAbastecido){
         if(tanque >= 100){
             return "Já ta abastecido!";
@@ -101,14 +114,7 @@ const carro = (function carro(){
     function mostraMarcha(){
         console.log(marcha);
     };
-
-    function frearCarro(valorFreio){
-        if(!verificaSeEstaLigado()){
-            return console.log("Não é possível desacelerar, pois o carro está desligado");
-        }
-        console.log("Desacelerando...");
-        velocidade -= valorFreio;
-    };
+    // ********************
 
      return {
         abastecer: ((valorAbastecido) => {
